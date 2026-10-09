@@ -1779,5 +1779,236 @@
    "mean": 0.7071,
    "std": 0.012
   }
+ },
+ "range": {
+  "bins": {
+   "0-2499": [
+    0,
+    2499
+   ],
+   "2500-4999": [
+    2500,
+    4999
+   ],
+   "5000-7499": [
+    5000,
+    7499
+   ],
+   "7500-9999": [
+    7500,
+    9999
+   ]
+  },
+  "whole_image_choice": {
+   "zero_shot": {
+    "mean": 0.2795,
+    "std": 0.0138
+   },
+   "calibrated": {
+    "mean": 0.37,
+    "std": 0.0255
+   },
+   "calibrated_fewshot": {
+    "mean": 0.4324,
+    "std": 0.0247
+   },
+   "majority_acc": 0.2843
+  },
+  "whole_image_per_seed": {
+   "0": {
+    "zero_shot": {
+     "acc": 0.281,
+     "nll": 1.4208,
+     "brier": 0.7772,
+     "ece": 0.1691
+    },
+    "calibrated": {
+     "acc": 0.3976,
+     "nll": 1.3021,
+     "brier": 0.7071,
+     "ece": 0.0364,
+     "aurc": 0.5922,
+     "fit": {
+      "qid": "range",
+      "scale": 62.514,
+      "bias": [
+       -1.036,
+       0.492,
+       0.568,
+       -0.023
+      ],
+      "train_nll": 1.3135,
+      "abstain_threshold": 0.9824
+     }
+    },
+    "calibrated_fewshot": {
+     "acc": 0.4643,
+     "nll": 1.2526,
+     "brier": 0.6818,
+     "ece": 0.0677
+    },
+    "n_calib": 180,
+    "n_test": 420,
+    "majority_acc": 0.2881
+   },
+   "1": {
+    "zero_shot": {
+     "acc": 0.2738,
+     "nll": 1.4357,
+     "brier": 0.7862,
+     "ece": 0.1848
+    },
+    "calibrated": {
+     "acc": 0.3643,
+     "nll": 1.3121,
+     "brier": 0.7135,
+     "ece": 0.0359,
+     "aurc": 0.6203,
+     "fit": {
+      "qid": "range",
+      "scale": 62.472,
+      "bias": [
+       -0.945,
+       0.33,
+       0.464,
+       0.152
+      ],
+      "train_nll": 1.3154,
+      "abstain_threshold": 0.9709
+     }
+    },
+    "calibrated_fewshot": {
+     "acc": 0.4,
+     "nll": 1.2621,
+     "brier": 0.6916,
+     "ece": 0.0564
+    },
+    "n_calib": 180,
+    "n_test": 420,
+    "majority_acc": 0.2929
+   },
+   "2": {
+    "zero_shot": {
+     "acc": 0.281,
+     "nll": 1.4297,
+     "brier": 0.7812,
+     "ece": 0.1802
+    },
+    "calibrated": {
+     "acc": 0.3595,
+     "nll": 1.3227,
+     "brier": 0.7164,
+     "ece": 0.0502,
+     "aurc": 0.6133,
+     "fit": {
+      "qid": "range",
+      "scale": 74.88,
+      "bias": [
+       -1.269,
+       0.499,
+       0.703,
+       0.067
+      ],
+      "train_nll": 1.2747,
+      "abstain_threshold": 0.9795
+     }
+    },
+    "calibrated_fewshot": {
+     "acc": 0.4405,
+     "nll": 1.2836,
+     "brier": 0.6901,
+     "ece": 0.0573
+    },
+    "n_calib": 180,
+    "n_test": 420,
+    "majority_acc": 0.2738
+   },
+   "3": {
+    "zero_shot": {
+     "acc": 0.3,
+     "nll": 1.4071,
+     "brier": 0.7686,
+     "ece": 0.1516
+    },
+    "calibrated": {
+     "acc": 0.3929,
+     "nll": 1.3169,
+     "brier": 0.7143,
+     "ece": 0.0262,
+     "aurc": 0.5887,
+     "fit": {
+      "qid": "range",
+      "scale": 60.909,
+      "bias": [
+       -1.185,
+       0.523,
+       0.548,
+       0.115
+      ],
+      "train_nll": 1.3124,
+      "abstain_threshold": 0.9768
+     }
+    },
+    "calibrated_fewshot": {
+     "acc": 0.4405,
+     "nll": 1.2684,
+     "brier": 0.6857,
+     "ece": 0.0525
+    },
+    "n_calib": 180,
+    "n_test": 420,
+    "majority_acc": 0.2857
+   },
+   "4": {
+    "zero_shot": {
+     "acc": 0.2619,
+     "nll": 1.4369,
+     "brier": 0.789,
+     "ece": 0.1921
+    },
+    "calibrated": {
+     "acc": 0.3357,
+     "nll": 1.3108,
+     "brier": 0.714,
+     "ece": 0.0435,
+     "aurc": 0.6663,
+     "fit": {
+      "qid": "range",
+      "scale": 58.119,
+      "bias": [
+       -0.73,
+       0.398,
+       0.56,
+       -0.228
+      ],
+      "train_nll": 1.3148,
+      "abstain_threshold": 0.9709
+     }
+    },
+    "calibrated_fewshot": {
+     "acc": 0.4167,
+     "nll": 1.25,
+     "brier": 0.6852,
+     "ece": 0.0363
+    },
+    "n_calib": 180,
+    "n_test": 420,
+    "majority_acc": 0.281
+   }
+  },
+  "from_crops": {
+   "range_4bin": {
+    "mean": 0.9167,
+    "std": 0.0058
+   },
+   "ge_5000": {
+    "mean": 0.94,
+    "std": 0.0062
+   },
+   "first_digit": {
+    "mean": 0.9171,
+    "std": 0.0074
+   }
+  }
  }
 }

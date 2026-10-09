@@ -32,6 +32,21 @@ five seeds, majority baseline, SigLIP 2 on the DGX Spark. `run.py` produces `res
 Whole four-digit number correct from the four crop decisions: **0.707 ± 0.012** (0.918⁴ ≈ 0.71, so the
 errors are independent across boxes).
 
+### Range questions
+
+The natural follow-up: can it answer "which range is the number in" from the image? `range.py` asks a
+four-bin range question (0–2499, 2500–4999, 5000–7499, 7500–9999) two ways.
+
+| Range question | zero-shot | few-shot | majority |
+|---|---|---|---|
+| 4-bin range, whole image (choice) | 0.280 | **0.432** ± 0.025 | 0.284 |
+| number ≥ 5000, whole image (noul) | 0.601 | **0.690** ± 0.011 | 0.513 |
+| 4-bin range, derived from the four crop decisions | | **0.917** ± 0.006 | |
+| number ≥ 5000, derived from the crop decisions | | **0.940** ± 0.006 | |
+
+Through the whole image a range question barely beats guessing. From the crops it is as good as the
+first-digit read (0.917), because a range is mostly a question about the leading digit.
+
 ![Whole image vs per-box crop.](results.png)
 
 ## Reading
@@ -56,5 +71,6 @@ errors are independent across boxes).
 ```bash
 python examples/forms/make_forms.py --out examples/forms/data --n 600       # or use the committed data
 python examples/forms/run.py --data examples/forms/data --model google/siglip2-so400m-patch14-384 --out examples/forms/results.json
+python examples/forms/range.py --data examples/forms/data --cache results/cache/forms_siglip.npz --model google/siglip2-so400m-patch14-384
 python examples/forms/make_figure.py
 ```
