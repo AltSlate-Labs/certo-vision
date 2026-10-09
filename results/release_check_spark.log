@@ -1,0 +1,77 @@
+== 07:24:51 [1/6] venv
+torch 2.14.1+cu130 cuda True
+== 07:25:05 [2/6] tests
+....                                                                     [100%]
+4 passed in 0.33s
+== 07:25:06 [3/6] demo samples (held out of calibration: calibration uses the first 140 per class)
+green.png
+not_a_banana.png
+overripe.png
+ripe.png
+semi_ripe.png
+== 07:25:06 [4/6] calibrate
+ripeness score n 560 holdout {'acc': 0.8036, 'ece': 0.0894, 'majority_acc': 0.2798, 'abstain_rate': 0.0952} mae 0.2633 thr 0.9656
+overripe noul n 560 holdout {'acc': 0.9464, 'ece': 0.0359, 'majority_acc': 0.7202, 'abstain_rate': 0.0952} mae None thr 0.9656
+stage choice n 560 holdout {'acc': 0.756, 'ece': 0.0838, 'majority_acc': 0.2798, 'abstain_rate': 0.0952} mae None thr 0.9656
+-rw-rw-r-- 1 rajpdus rajpdus 7800954 Oct  9 07:26 demo/banana/calib.npz
+== 07:26:15 [5/6] decide on held-out samples + one STL-10 cat (out of scope)
+green.png stage Green 0.9758 score 0.002 overripe 0.0 conf 1.0 abstain False {'embed': 296.4, 'decide': 0.717}
+not_a_banana.png stage Semi-ripe 0.9562 score 0.999 overripe 0.0142 conf 0.6505 abstain True {'embed': 75.64, 'decide': 1.454}
+overripe.png stage Overripe 0.8895 score 2.952 overripe 0.9249 conf 0.9918 abstain False {'embed': 79.6, 'decide': 0.817}
+ripe.png stage Ripe 0.8899 score 2.028 overripe 0.0226 conf 0.9995 abstain False {'embed': 82.96, 'decide': 0.593}
+semi_ripe.png stage Semi-ripe 0.8704 score 1.047 overripe 0.0394 conf 1.0 abstain False {'embed': 80.86, 'decide': 0.783}
+02400.png stage Overripe 0.7091 score 1.495 overripe 0.7456 conf 0.5779 abstain True {'embed': 78.08, 'decide': 0.974}
+== 07:26:44 [6/6] serve round trip
+{"backbone":"siglip","calibrated_questions":["ripeness","overripe","stage"],"recipe_questions":["ripeness","overripe","stage"]}
+{
+ "model": "certo-vision-0.1",
+ "answers": {
+  "ripeness": {
+   "type": "score",
+   "score": 2.952,
+   "legend": {
+    "0": "Green: unripe, fully green banana",
+    "1": "Semi-ripe: turning yellow, still green at the tips",
+    "2": "Ripe: fully yellow banana",
+    "3": "Overripe: yellow with brown spots, or mostly brown"
+   },
+   "probabilities": {
+    "0": 0.0014,
+    "1": 0.0139,
+    "2": 0.0165,
+    "3": 0.9683
+   },
+   "confidence": 0.9918,
+   "calibrated": true,
+   "abstain": false
+  },
+  "overripe": {
+   "type": "noul",
+   "noul": 0.9249,
+   "confidence": 0.9918,
+   "calibrated": true,
+   "abstain": false
+  },
+  "stage": {
+   "type": "choice",
+   "choice": "Overripe",
+   "probabilities": {
+    "Green": 0.0187,
+    "Semi-ripe": 0.0717,
+    "Ripe": 0.0201,
+    "Overripe": 0.8895
+   },
+   "confidence": 0.9918,
+   "calibrated": true,
+   "type": "noul",
+   "noul": 0.0142,
+   "confidence": 0.6505,
+   "abstain": true
+== 07:27:12 [7/7] trial reproduction from the cached embeddings
+[banana/ripeness score n=600] acc zero 0.483 cal 0.626 fewshot 0.833±0.025 (majority 0.267) ece 0.044 mae 0.23 rho 0.90 | abstain in-scope 0.09; OOD rejected bottle_good 1.00, textures 1.00, stl10_cats 1.00
+[banana/overripe noul n=600] acc zero 0.799 cal 0.801 fewshot 0.929±0.014 (majority 0.745) ece 0.028 | abstain in-scope 0.09; OOD rejected bottle_good 1.00, textures 1.00, stl10_cats 1.00
+[banana/stage choice n=600] acc zero 0.499 cal 0.600 fewshot 0.785±0.028 (majority 0.267) ece 0.051 | abstain in-scope 0.09; OOD rejected bottle_good 1.00, textures 1.00, stl10_cats 1.00
+ripeness old {'mean': 0.8334, 'std': 0.0246} new {'mean': 0.8334, 'std': 0.0246} scope old 0.0905 new 0.0857
+overripe old {'mean': 0.9295, 'std': 0.0136} new {'mean': 0.9295, 'std': 0.0136} scope old 0.0905 new 0.0857
+stage old {'mean': 0.7852, 'std': 0.0282} new {'mean': 0.7852, 'std': 0.0282} scope old 0.0905 new 0.0857
+RELEASE_CHECK_DONE
