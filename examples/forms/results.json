@@ -2010,5 +2010,65 @@
     "std": 0.0074
    }
   }
+ },
+ "digits_head": {
+  "ridge": {
+   "digit_acc": {
+    "mean": 0.9606,
+    "std": 0.0019
+   },
+   "whole_number_acc": {
+    "mean": 0.8514,
+    "std": 0.0062
+   },
+   "hyper": [
+    0.01,
+    0.01,
+    0.01,
+    0.1,
+    0.01
+   ]
+  },
+  "knn": {
+   "digit_acc": {
+    "mean": 0.9252,
+    "std": 0.0064
+   },
+   "whole_number_acc": {
+    "mean": 0.7376,
+    "std": 0.0218
+   },
+   "hyper": [
+    3,
+    3,
+    20,
+    10,
+    10
+   ]
+  }
+ },
+ "digit_cnn": {
+  "mnist_only": {
+   "digit_acc": {
+    "mean": 0.9664,
+    "std": 0.006
+   },
+   "whole_number_acc": {
+    "mean": 0.8724,
+    "std": 0.0218
+   }
+  },
+  "finetuned_on_calib_crops": {
+   "digit_acc": {
+    "mean": 0.9793,
+    "std": 0.0032
+   },
+   "whole_number_acc": {
+    "mean": 0.9205,
+    "std": 0.0128
+   }
+  },
+  "params": 1199882,
+  "epochs_mnist": 4
  }
 }

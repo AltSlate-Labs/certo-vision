@@ -47,6 +47,28 @@ four-bin range question (0–2499, 2500–4999, 5000–7499, 7500–9999) two wa
 Through the whole image a range question barely beats guessing. From the crops it is as good as the
 first-digit read (0.917), because a range is mostly a question about the leading digit.
 
+### Improving the digits
+
+Everything below reads the same per-box crops on the same form-level splits (five seeds, 720 calibration
+crops, 1680 test crops). `digits_probe.py` fits a ridge probe and a k-NN on the frozen SigLIP 2 crop
+features; `digit_cnn.py` trains a 1.2 M-parameter CNN on MNIST for four epochs with rotation, scale and
+shift augmentation (seconds on a GB10), applies it to the crops after MNIST-style normalisation, and then
+fine-tunes it on the calibration forms' crops.
+
+| Per-box digit reader | digit | whole 4-digit number |
+|---|---|---|
+| decider, prototype head (the released recipe) | 0.918 ± 0.005 | 0.707 |
+| k-NN on SigLIP 2 crop features | 0.925 ± 0.006 | 0.738 |
+| ridge probe on SigLIP 2 crop features | 0.961 ± 0.002 | 0.851 |
+| CNN trained on MNIST only (MNIST test 0.991) | 0.966 ± 0.006 | 0.872 |
+| the same CNN fine-tuned on the 720 calibration crops | **0.979 ± 0.003** | **0.921 ± 0.013** |
+
+Doubling the calibration crops does not move the prototype head (0.918 to 0.920): the limit is the pooled
+feature, not the amount of data. A regularised linear probe recovers four points, and a purpose-built
+digit CNN recovers six, with the whole number going from 71% to 92%. For handwritten digits the answer
+is a small dedicated reader on the crop, fine-tuned on the deployment's own handwriting, not a larger
+embedding model. Its softmax can be temperature-calibrated and served behind the same typed question.
+
 ![Whole image vs per-box crop.](results.png)
 
 ## Reading
@@ -72,5 +94,7 @@ first-digit read (0.917), because a range is mostly a question about the leading
 python examples/forms/make_forms.py --out examples/forms/data --n 600       # or use the committed data
 python examples/forms/run.py --data examples/forms/data --model google/siglip2-so400m-patch14-384 --out examples/forms/results.json
 python examples/forms/range.py --data examples/forms/data --cache results/cache/forms_siglip.npz --model google/siglip2-so400m-patch14-384
+python examples/forms/digits_probe.py --data examples/forms/data --cache results/cache/forms_siglip.npz
+HF_HOME=~/Downloads/data/mnist python examples/forms/digit_cnn.py --data examples/forms/data
 python examples/forms/make_figure.py
 ```

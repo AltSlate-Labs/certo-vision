@@ -90,7 +90,8 @@ certo-vision calibrate --recipe my.json --images images --out my_calib.npz
 [`examples/forms/`](examples/forms/) tests the model on a colleague's question: four boxes with a handwritten
 number from 0 to 9999 and a printed field name in front (item, quantity, ...). The printed word is read
 at 100%; the digits through the whole image are not (29 to 50% on a 10-way question); cropping each box
-first gives 92% per digit and 71% per whole number. Data, results and the reading are in that directory.
+first gives 92% per digit and 71% per whole number, and a small digit CNN on the same crops, fine-tuned on the
+calibration forms, gives 98% per digit and 92% per number. Data, results and the reading are in that directory.
 
 ![Forms example: whole image vs per-box crop.](examples/forms/results.png)
 
