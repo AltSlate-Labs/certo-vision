@@ -85,6 +85,15 @@ Write your own recipe, drop labelled images in `images/<label>/`, and calibrate:
 certo-vision calibrate --recipe my.json --images images --out my_calib.npz
 ```
 
+## Worked example: a form with a field name and four handwritten digits
+
+[`examples/forms/`](examples/forms/) tests the model on a colleague's question: four boxes with a handwritten
+number from 0 to 9999 and a printed field name in front (item, quantity, ...). The printed word is read
+at 100%; the digits through the whole image are not (29 to 50% on a 10-way question); cropping each box
+first gives 92% per digit and 71% per whole number. Data, results and the reading are in that directory.
+
+![Forms example: whole image vs per-box crop.](examples/forms/results.png)
+
 ## Results
 
 ![Accuracy per question on public stand-ins for client work: zero-shot, calibrated + few-shot (30% of the images), majority class. Five seeds.](report/figures/results.png)
@@ -180,6 +189,7 @@ certo_vision/   decider (prototypes, calibration, gate, persistence), embedders,
 recipes/        the question sets used in the report
 demo/banana/    a calibration file and held-out samples to try the CLI immediately
 results/        the JSON behind every number in the report
+examples/       worked examples with their data and results (forms: printed field name + handwritten digits)
 report/         report.md, report.pdf, figures and the scripts that make them
 benchmarks/     STL-10 backbone comparison and out-of-scope study
 tools/          dataset export, HTTP helper, the end-to-end release check

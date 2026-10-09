@@ -194,7 +194,17 @@ camera, and the in-scope abstain rate must be reported as a first-class metric n
 in Section 4.2 is the favourable case: the out-of-scope sets include the other MVTec objects, shot in the
 same style, and the gate still rejected all of them.
 
-### 4.4 Cost
+### 4.4 Where the ceiling is: a form with handwritten digits
+
+A worked example in the repository (`examples/forms/`) puts a number on the fine-detail limit. 600
+synthetic form snippets carry a printed field name (six options) and four boxes with MNIST digits. Read
+through the whole image, the field name is 100% after calibration (96% zero-shot), but each digit is only
+29–50% on a 10-way question with the worst calibration error in this report, and "is the number ≥ 5000"
+is 0.69. Cropping each box first and asking one digit question per crop gives 0.918 ± 0.005 per digit and
+0.707 per whole number. Printed words are within scope of the pooled embedding; handwritten digits need a
+crop step in front of the decider, and beyond about 92% per digit they need a digit classifier.
+
+### 4.5 Cost
 
 Embedding one image takes 72 ms at batch size one on the GB10 (fp32, no compilation); answering the whole
 schema afterwards is about 1 ms for two questions and grows linearly in the number of options. The
@@ -213,7 +223,7 @@ Not shown:
   re-fitted on the new camera. This is the first thing to test on a real client set.
 - **Comparison to a VLM.** We did not run a generative vision-language model on the same typed questions.
   The claim is cost and calibration, not that a VLM would be less accurate.
-- **Fine detail.** The screw failure is diagnosed, not fixed. A trained token-level pooling head or a
+- **Fine detail.** The screw failure is diagnosed, not fixed, and the forms example shows the same limit on handwritten digits. A trained token-level pooling head or a
   patch-based fallback is the obvious next experiment and is out of scope for this release.
 - **Ordinal scores beyond one dataset.** The blur score is synthetic; the ripeness score is one real set.
 - **Thin options.** Defect-type rows had under ten calibration images per option.
