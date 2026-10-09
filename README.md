@@ -113,7 +113,7 @@ calibration forms, gives 98% per digit and 92% per number. Data, results and the
 Coarse decisions pass; fine-grained ones hit the pooled-embedding ceiling; the scope gate rejected every
 out-of-scope image, including other factory parts shot in the same style. Full tables, the backbone
 comparison, the scope study and the caveats are in the [technical report](report/report.pdf)
-([markdown](report/report.md)). Every number is read from `results/*.json`.
+([markdown](report/report.md), [html](report/report.html)). Every number is read from `results/*.json`.
 
 ![Which signal detects out-of-scope input: nearest-neighbour ratio vs max probability, SigLIP 2, STL-10 questions.](report/figures/scope.png)
 
@@ -191,7 +191,7 @@ recipes/        the question sets used in the report
 demo/banana/    a calibration file and held-out samples to try the CLI immediately
 results/        the JSON behind every number in the report
 examples/       worked examples with their data and results (forms: printed field name + handwritten digits)
-report/         report.md, report.pdf, figures and the scripts that make them
+report/         report.md, report.pdf, report.html, figures and the scripts that make them
 benchmarks/     STL-10 backbone comparison and out-of-scope study
 tools/          dataset export, HTTP helper, the end-to-end release check
 tests/          pipeline tests on a deterministic stub embedder (no weights)
