@@ -1,0 +1,224 @@
+{
+  "backbone": "siglip",
+  "model": "/home/rajpdus/Downloads/model/siglip2-so400m-patch14-384",
+  "seed": 0,
+  "n_in_test": 700,
+  "ood_sets": {
+    "dtd": 200,
+    "eurosat": 200,
+    "pets": 200
+  },
+  "questions": {
+    "subject": {
+      "in_scope": {
+        "agree": {
+          "mean": 0.71,
+          "p05": 0.3492
+        },
+        "nn_ratio": {
+          "mean": 0.981,
+          "p05": 0.9059
+        },
+        "conf": {
+          "mean": 0.6957,
+          "p05": 0.3421
+        },
+        "maxprob": {
+          "mean": 0.9925,
+          "p05": 0.9785
+        },
+        "p_first": {
+          "mean": 0.0982,
+          "p05": 0.0
+        }
+      },
+      "in_scope_maxprob_gt_0.9": 0.9829,
+      "ood": {
+        "dtd": {
+          "mean": {
+            "agree": 0.5805,
+            "nn_ratio": 0.6656,
+            "conf": 0.3902,
+            "maxprob": 0.3838,
+            "p_first": 0.0462
+          },
+          "auroc_in_vs_ood": {
+            "agree": 0.7222,
+            "nn_ratio": 0.9999,
+            "conf": 0.904,
+            "maxprob": 0.9994,
+            "p_first": 0.1003
+          },
+          "rejected_at_95pct_in_coverage": {
+            "agree": 0.06,
+            "nn_ratio": 1.0,
+            "conf": 0.33,
+            "maxprob": 1.0
+          },
+          "maxprob_gt_0.9": 0.01,
+          "top_predictions": {
+            "cat": 65,
+            "bird": 31,
+            "ship": 24,
+            "dog": 22
+          }
+        },
+        "eurosat": {
+          "mean": {
+            "agree": 0.6254,
+            "nn_ratio": 0.8343,
+            "conf": 0.5226,
+            "maxprob": 0.3207,
+            "p_first": 0.2263
+          },
+          "auroc_in_vs_ood": {
+            "agree": 0.6688,
+            "nn_ratio": 0.9922,
+            "conf": 0.7899,
+            "maxprob": 0.9999,
+            "p_first": 0.0986
+          },
+          "rejected_at_95pct_in_coverage": {
+            "agree": 0.005,
+            "nn_ratio": 1.0,
+            "conf": 0.015,
+            "maxprob": 1.0
+          },
+          "maxprob_gt_0.9": 0.0,
+          "top_predictions": {
+            "airplane": 83,
+            "car": 48,
+            "bird": 35,
+            "ship": 14
+          }
+        },
+        "pets": {
+          "mean": {
+            "agree": 0.8103,
+            "nn_ratio": 0.8391,
+            "conf": 0.6809,
+            "maxprob": 0.9977,
+            "p_first": 0.0
+          },
+          "auroc_in_vs_ood": {
+            "agree": 0.3516,
+            "nn_ratio": 0.9788,
+            "conf": 0.5587,
+            "maxprob": 0.5674,
+            "p_first": 0.5708
+          },
+          "rejected_at_95pct_in_coverage": {
+            "agree": 0.0,
+            "nn_ratio": 0.93,
+            "conf": 0.0,
+            "maxprob": 0.005
+          },
+          "maxprob_gt_0.9": 1.0,
+          "top_predictions": {
+            "dog": 143,
+            "cat": 57
+          }
+        }
+      }
+    },
+    "is_target": {
+      "in_scope": {
+        "agree": {
+          "mean": 0.8695,
+          "p05": 0.4503
+        },
+        "nn_ratio": {
+          "mean": 0.981,
+          "p05": 0.9059
+        },
+        "conf": {
+          "mean": 0.8529,
+          "p05": 0.4415
+        },
+        "maxprob": {
+          "mean": 0.9741,
+          "p05": 0.8485
+        },
+        "p_first": {
+          "mean": 0.0997,
+          "p05": 0.0
+        }
+      },
+      "in_scope_maxprob_gt_0.9": 0.9229,
+      "ood": {
+        "dtd": {
+          "mean": {
+            "agree": 0.8289,
+            "nn_ratio": 0.6656,
+            "conf": 0.5515,
+            "maxprob": 0.9802,
+            "p_first": 0.0198
+          },
+          "auroc_in_vs_ood": {
+            "agree": 0.6251,
+            "nn_ratio": 0.9999,
+            "conf": 0.9045,
+            "maxprob": 0.6801,
+            "p_first": 0.3375
+          },
+          "rejected_at_95pct_in_coverage": {
+            "agree": 0.08,
+            "nn_ratio": 1.0,
+            "conf": 0.18,
+            "maxprob": 0.015
+          },
+          "maxprob_gt_0.9": 0.97,
+          "frac_predicted_true": 0.0
+        },
+        "eurosat": {
+          "mean": {
+            "agree": 0.9066,
+            "nn_ratio": 0.8343,
+            "conf": 0.7569,
+            "maxprob": 0.9983,
+            "p_first": 0.0017
+          },
+          "auroc_in_vs_ood": {
+            "agree": 0.5999,
+            "nn_ratio": 0.9922,
+            "conf": 0.7711,
+            "maxprob": 0.4844,
+            "p_first": 0.5182
+          },
+          "rejected_at_95pct_in_coverage": {
+            "agree": 0.0,
+            "nn_ratio": 1.0,
+            "conf": 0.0,
+            "maxprob": 0.0
+          },
+          "maxprob_gt_0.9": 1.0,
+          "frac_predicted_true": 0.0
+        },
+        "pets": {
+          "mean": {
+            "agree": 0.4996,
+            "nn_ratio": 0.8391,
+            "conf": 0.4207,
+            "maxprob": 0.9264,
+            "p_first": 0.3136
+          },
+          "auroc_in_vs_ood": {
+            "agree": 0.8824,
+            "nn_ratio": 0.9788,
+            "conf": 0.928,
+            "maxprob": 0.8371,
+            "p_first": 0.1606
+          },
+          "rejected_at_95pct_in_coverage": {
+            "agree": 0.55,
+            "nn_ratio": 0.93,
+            "conf": 0.67,
+            "maxprob": 0.125
+          },
+          "maxprob_gt_0.9": 0.79,
+          "frac_predicted_true": 0.29
+        }
+      }
+    }
+  }
+}

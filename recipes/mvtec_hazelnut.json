@@ -1,0 +1,36 @@
+{
+ "name": "mvtec_hazelnut",
+ "images": "~/Downloads/data/mvtec/hazelnut",
+ "questions": {
+  "defective": {
+   "type": "noul",
+   "instructions": "Is this hazelnut defective? The image shows a hazelnut in its shell.",
+   "criteria": {
+    "true": "yes, the hazelnut has a visible defect: a crack in the shell, a cut mark on the shell, a hole in the shell, printed marks or ink on the shell",
+    "false": "no, the hazelnut is intact and defect-free"
+   },
+   "labels": {
+    "good": "false",
+    "*": "true"
+   }
+  },
+  "defect_type": {
+   "type": "choice",
+   "instructions": "What kind of defect does this hazelnut have?",
+   "criteria": {
+    "crack": "a crack in the shell",
+    "cut": "a cut mark on the shell",
+    "hole": "a hole in the shell",
+    "print": "printed marks or ink on the shell"
+   },
+   "labels": "folder"
+  }
+ },
+ "ood": {
+  "bottle_good": "~/Downloads/data/mvtec/bottle/good",
+  "screw_good": "~/Downloads/data/mvtec/screw/good",
+  "carpet_good": "~/Downloads/data/mvtec/carpet/good",
+  "textures": "~/Downloads/data/ood/dtd",
+  "stl10_cats": "~/Downloads/data/stl10/cat"
+ }
+}

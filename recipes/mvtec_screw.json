@@ -1,0 +1,37 @@
+{
+ "name": "mvtec_screw",
+ "images": "~/Downloads/data/mvtec/screw",
+ "questions": {
+  "defective": {
+   "type": "noul",
+   "instructions": "Is this screw defective? The image shows a metal screw lying on a plain background.",
+   "criteria": {
+    "true": "yes, the screw has a visible defect: the tip of the screw is damaged or bent, a scratch on the screw head, a scratch on the neck of the screw, damaged thread on the side of the screw, damaged thread near the top of the screw",
+    "false": "no, the screw is intact and defect-free"
+   },
+   "labels": {
+    "good": "false",
+    "*": "true"
+   }
+  },
+  "defect_type": {
+   "type": "choice",
+   "instructions": "What kind of defect does this screw have?",
+   "criteria": {
+    "manipulated_front": "the tip of the screw is damaged or bent",
+    "scratch_head": "a scratch on the screw head",
+    "scratch_neck": "a scratch on the neck of the screw",
+    "thread_side": "damaged thread on the side of the screw",
+    "thread_top": "damaged thread near the top of the screw"
+   },
+   "labels": "folder"
+  }
+ },
+ "ood": {
+  "bottle_good": "~/Downloads/data/mvtec/bottle/good",
+  "hazelnut_good": "~/Downloads/data/mvtec/hazelnut/good",
+  "carpet_good": "~/Downloads/data/mvtec/carpet/good",
+  "textures": "~/Downloads/data/ood/dtd",
+  "stl10_cats": "~/Downloads/data/stl10/cat"
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "name": "banana",
+ "images": "~/Downloads/data/banana",
+ "questions": {
+  "ripeness": {
+   "type": "score",
+   "instructions": "How ripe is the banana?",
+   "criteria": [
+    "Green: unripe, fully green banana",
+    "Semi-ripe: turning yellow, still green at the tips",
+    "Ripe: fully yellow banana",
+    "Overripe: yellow with brown spots, or mostly brown"
+   ],
+   "labels": {
+    "Green": "0",
+    "Semi-ripe": "1",
+    "Ripe": "2",
+    "Overripe": "3"
+   }
+  },
+  "overripe": {
+   "type": "noul",
+   "instructions": "Is the banana overripe?",
+   "criteria": {
+    "true": "yes, the banana is overripe with brown spots or mostly brown",
+    "false": "no, the banana is green, turning yellow or cleanly yellow"
+   },
+   "labels": {
+    "Overripe": "true",
+    "*": "false"
+   }
+  },
+  "stage": {
+   "type": "choice",
+   "instructions": "Which ripeness stage is the banana at?",
+   "criteria": {
+    "Green": "unripe, fully green banana",
+    "Semi-ripe": "turning yellow, still green at the tips",
+    "Ripe": "fully yellow banana",
+    "Overripe": "yellow with brown spots, or mostly brown"
+   },
+   "labels": "folder"
+  }
+ },
+ "ood": {
+  "bottle_good": "~/Downloads/data/mvtec/bottle/good",
+  "textures": "~/Downloads/data/ood/dtd",
+  "stl10_cats": "~/Downloads/data/stl10/cat"
+ }
+}

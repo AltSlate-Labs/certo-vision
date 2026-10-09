@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "certo-vision"
+version = "0.1.0"
+description = "Calibrated typed image decisions (noul / choice / score) with abstention, from a few dozen labelled images on a frozen SigLIP 2 backbone"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{name = "Dushyant Rajput", email = "dushyant@altslate.com"}]
+dependencies = ["numpy>=1.26", "pillow>=10"]
+
+[project.optional-dependencies]
+siglip = ["torch>=2.2", "transformers>=4.47", "sentencepiece", "protobuf"]
+gemma = ["sentence-transformers>=6.1"]
+serve = ["fastapi>=0.110", "uvicorn>=0.29", "pydantic>=2"]
+data = ["datasets>=3", "huggingface_hub"]
+dev = ["pytest>=8", "fastapi>=0.110", "httpx"]
+
+[project.scripts]
+certo-vision = "certo_vision.cli:main"
+
+[project.urls]
+Repository = "https://github.com/AltSlate-Labs/certo-vision"
+
+[tool.setuptools]
+packages = ["certo_vision"]

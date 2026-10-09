@@ -1,0 +1,102 @@
+{
+ "recipe": "recipes/banana.json",
+ "images": "/home/rajpdus/Downloads/data/banana",
+ "n_images": 560,
+ "questions": {
+  "ripeness": {
+   "type": "score",
+   "n": 560,
+   "per_option": {
+    "0": 140,
+    "1": 140,
+    "2": 140,
+    "3": 140
+   },
+   "holdout": {
+    "acc": 0.8036,
+    "nll": 0.6238,
+    "brier": 0.3139,
+    "ece": 0.0894,
+    "mae": 0.2633,
+    "spearman": 0.8813,
+    "n_fit": 392,
+    "n_test": 168,
+    "majority_acc": 0.2798,
+    "abstain_rate": 0.0952
+   },
+   "fit": {
+    "qid": "ripeness",
+    "scale": 234.67,
+    "bias": [
+     1.813,
+     0.422,
+     -0.231,
+     -2.004
+    ],
+    "train_nll": 0.4121,
+    "abstain_threshold": 0.9656
+   }
+  },
+  "overripe": {
+   "type": "noul",
+   "n": 560,
+   "per_option": {
+    "true": 140,
+    "false": 420
+   },
+   "holdout": {
+    "acc": 0.9464,
+    "nll": 0.157,
+    "brier": 0.0964,
+    "ece": 0.0359,
+    "n_fit": 392,
+    "n_test": 168,
+    "majority_acc": 0.7202,
+    "abstain_rate": 0.0952
+   },
+   "fit": {
+    "qid": "overripe",
+    "scale": 214.548,
+    "bias": [
+     -0.042,
+     0.042
+    ],
+    "train_nll": 0.1567,
+    "abstain_threshold": 0.9656
+   }
+  },
+  "stage": {
+   "type": "choice",
+   "n": 560,
+   "per_option": {
+    "Green": 140,
+    "Semi-ripe": 140,
+    "Ripe": 140,
+    "Overripe": 140
+   },
+   "holdout": {
+    "acc": 0.756,
+    "nll": 0.7508,
+    "brier": 0.369,
+    "ece": 0.0838,
+    "n_fit": 392,
+    "n_test": 168,
+    "majority_acc": 0.2798,
+    "abstain_rate": 0.0952
+   },
+   "fit": {
+    "qid": "stage",
+    "scale": 179.441,
+    "bias": [
+     1.705,
+     -0.086,
+     -1.101,
+     -0.517
+    ],
+    "train_nll": 0.5428,
+    "abstain_threshold": 0.9656
+   }
+  }
+ },
+ "saved": "demo/banana/calib.npz"
+}

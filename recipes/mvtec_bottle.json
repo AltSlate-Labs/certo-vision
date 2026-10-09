@@ -1,0 +1,35 @@
+{
+ "name": "mvtec_bottle",
+ "images": "~/Downloads/data/mvtec/bottle",
+ "questions": {
+  "defective": {
+   "type": "noul",
+   "instructions": "Is this bottle defective? The image shows a bottle, seen from above, looking into the opening.",
+   "criteria": {
+    "true": "yes, the bottle has a visible defect: a large break or missing piece in the bottle rim, a small chip or break in the bottle rim, foreign particles or dirt inside the bottle",
+    "false": "no, the bottle is intact and defect-free"
+   },
+   "labels": {
+    "good": "false",
+    "*": "true"
+   }
+  },
+  "defect_type": {
+   "type": "choice",
+   "instructions": "What kind of defect does this bottle have?",
+   "criteria": {
+    "broken_large": "a large break or missing piece in the bottle rim",
+    "broken_small": "a small chip or break in the bottle rim",
+    "contamination": "foreign particles or dirt inside the bottle"
+   },
+   "labels": "folder"
+  }
+ },
+ "ood": {
+  "screw_good": "~/Downloads/data/mvtec/screw/good",
+  "hazelnut_good": "~/Downloads/data/mvtec/hazelnut/good",
+  "carpet_good": "~/Downloads/data/mvtec/carpet/good",
+  "textures": "~/Downloads/data/ood/dtd",
+  "stl10_cats": "~/Downloads/data/stl10/cat"
+ }
+}

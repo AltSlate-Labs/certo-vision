@@ -1,0 +1,37 @@
+{
+ "name": "mvtec_carpet",
+ "images": "~/Downloads/data/mvtec/carpet",
+ "questions": {
+  "defective": {
+   "type": "noul",
+   "instructions": "Is this carpet defective? The image shows a close-up of carpet fabric.",
+   "criteria": {
+    "true": "yes, the carpet has a visible defect: a colour stain on the carpet, a cut in the carpet fabric, a hole in the carpet, a metal piece on the carpet, a loose thread on the carpet",
+    "false": "no, the carpet is intact and defect-free"
+   },
+   "labels": {
+    "good": "false",
+    "*": "true"
+   }
+  },
+  "defect_type": {
+   "type": "choice",
+   "instructions": "What kind of defect does this carpet have?",
+   "criteria": {
+    "color": "a colour stain on the carpet",
+    "cut": "a cut in the carpet fabric",
+    "hole": "a hole in the carpet",
+    "metal_contamination": "a metal piece on the carpet",
+    "thread": "a loose thread on the carpet"
+   },
+   "labels": "folder"
+  }
+ },
+ "ood": {
+  "bottle_good": "~/Downloads/data/mvtec/bottle/good",
+  "screw_good": "~/Downloads/data/mvtec/screw/good",
+  "hazelnut_good": "~/Downloads/data/mvtec/hazelnut/good",
+  "textures": "~/Downloads/data/ood/dtd",
+  "stl10_cats": "~/Downloads/data/stl10/cat"
+ }
+}

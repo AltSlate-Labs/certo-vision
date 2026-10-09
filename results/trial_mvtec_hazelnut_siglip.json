@@ -1,0 +1,592 @@
+{
+  "name": "mvtec_hazelnut",
+  "backbone": "siglip",
+  "model": "/home/rajpdus/Downloads/model/siglip2-so400m-patch14-384",
+  "n_images": 210,
+  "folders": {
+    "crack": 18,
+    "cut": 17,
+    "good": 140,
+    "hole": 18,
+    "print": 17
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "questions": {
+    "defective": {
+      "type": "noul",
+      "n": 210,
+      "n_calib": 63,
+      "n_test": 147,
+      "class_counts": {
+        "true": 70,
+        "false": 140
+      },
+      "summary": {
+        "zero_shot": {
+          "acc": {
+            "mean": 0.751,
+            "std": 0.0141
+          },
+          "nll": {
+            "mean": 0.526,
+            "std": 0.0093
+          },
+          "brier": {
+            "mean": 0.3489,
+            "std": 0.0079
+          },
+          "ece": {
+            "mean": 0.1162,
+            "std": 0.0108
+          }
+        },
+        "calibrated": {
+          "acc": {
+            "mean": 0.9497,
+            "std": 0.0124
+          },
+          "nll": {
+            "mean": 0.1558,
+            "std": 0.0162
+          },
+          "brier": {
+            "mean": 0.0858,
+            "std": 0.0063
+          },
+          "ece": {
+            "mean": 0.0404,
+            "std": 0.0111
+          },
+          "aurc": {
+            "mean": 0.0206,
+            "std": 0.0044
+          }
+        },
+        "calibrated_fewshot": {
+          "acc": {
+            "mean": 0.951,
+            "std": 0.0057
+          },
+          "nll": {
+            "mean": 0.1342,
+            "std": 0.0215
+          },
+          "brier": {
+            "mean": 0.0734,
+            "std": 0.0099
+          },
+          "ece": {
+            "mean": 0.0327,
+            "std": 0.004
+          }
+        },
+        "majority_acc": 0.6585
+      },
+      "scope": {
+        "abstain_threshold": 0.9858,
+        "in_scope_abstain_rate": 0.0612,
+        "ood": {
+          "bottle_good": {
+            "n": 120,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "screw_good": {
+            "n": 141,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "carpet_good": {
+            "n": 128,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "textures": {
+            "n": 150,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "stl10_cats": {
+            "n": 100,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          }
+        }
+      },
+      "per_seed": {
+        "0": {
+          "zero_shot": {
+            "acc": 0.7483,
+            "nll": 0.518,
+            "brier": 0.342,
+            "ece": 0.1067
+          },
+          "calibrated": {
+            "acc": 0.966,
+            "nll": 0.152,
+            "brier": 0.0803,
+            "ece": 0.0431,
+            "aurc": 0.0249,
+            "fit": {
+              "qid": "defective",
+              "scale": 302.478,
+              "bias": [
+                -1.69,
+                1.69
+              ],
+              "train_nll": 0.1517,
+              "abstain_threshold": 0.9858
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.9592,
+            "nll": 0.1233,
+            "brier": 0.0632,
+            "ece": 0.0337
+          },
+          "n_calib": 63,
+          "n_test": 147,
+          "majority_acc": 0.6463
+        },
+        "1": {
+          "zero_shot": {
+            "acc": 0.7551,
+            "nll": 0.5342,
+            "brier": 0.3555,
+            "ece": 0.1257
+          },
+          "calibrated": {
+            "acc": 0.9524,
+            "nll": 0.1834,
+            "brier": 0.0952,
+            "ece": 0.0307,
+            "aurc": 0.022,
+            "fit": {
+              "qid": "defective",
+              "scale": 369.656,
+              "bias": [
+                -2.095,
+                2.095
+              ],
+              "train_nll": 0.0841,
+              "abstain_threshold": 0.986
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.9456,
+            "nll": 0.1719,
+            "brier": 0.09,
+            "ece": 0.0372
+          },
+          "n_calib": 63,
+          "n_test": 147,
+          "majority_acc": 0.6735
+        },
+        "2": {
+          "zero_shot": {
+            "acc": 0.7279,
+            "nll": 0.5373,
+            "brier": 0.3587,
+            "ece": 0.1025
+          },
+          "calibrated": {
+            "acc": 0.9524,
+            "nll": 0.1518,
+            "brier": 0.0823,
+            "ece": 0.0516,
+            "aurc": 0.0144,
+            "fit": {
+              "qid": "defective",
+              "scale": 257.9,
+              "bias": [
+                -1.353,
+                1.353
+              ],
+              "train_nll": 0.1767,
+              "abstain_threshold": 0.983
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.9524,
+            "nll": 0.1322,
+            "brier": 0.0718,
+            "ece": 0.0267
+          },
+          "n_calib": 63,
+          "n_test": 147,
+          "majority_acc": 0.6667
+        },
+        "3": {
+          "zero_shot": {
+            "acc": 0.7619,
+            "nll": 0.5235,
+            "brier": 0.347,
+            "ece": 0.1231
+          },
+          "calibrated": {
+            "acc": 0.9456,
+            "nll": 0.1404,
+            "brier": 0.0817,
+            "ece": 0.0495,
+            "aurc": 0.0176,
+            "fit": {
+              "qid": "defective",
+              "scale": 285.574,
+              "bias": [
+                -1.431,
+                1.431
+              ],
+              "train_nll": 0.1956,
+              "abstain_threshold": 0.9656
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.9524,
+            "nll": 0.1223,
+            "brier": 0.0711,
+            "ece": 0.0345
+          },
+          "n_calib": 63,
+          "n_test": 147,
+          "majority_acc": 0.6599
+        },
+        "4": {
+          "zero_shot": {
+            "acc": 0.7619,
+            "nll": 0.5172,
+            "brier": 0.3413,
+            "ece": 0.1231
+          },
+          "calibrated": {
+            "acc": 0.932,
+            "nll": 0.1515,
+            "brier": 0.0893,
+            "ece": 0.027,
+            "aurc": 0.0239,
+            "fit": {
+              "qid": "defective",
+              "scale": 263.229,
+              "bias": [
+                -1.693,
+                1.693
+              ],
+              "train_nll": 0.1748,
+              "abstain_threshold": 0.9832
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.9456,
+            "nll": 0.1215,
+            "brier": 0.0709,
+            "ece": 0.0312
+          },
+          "n_calib": 63,
+          "n_test": 147,
+          "majority_acc": 0.6463
+        }
+      }
+    },
+    "defect_type": {
+      "type": "choice",
+      "n": 70,
+      "n_calib": 21,
+      "n_test": 49,
+      "class_counts": {
+        "crack": 18,
+        "cut": 17,
+        "hole": 18,
+        "print": 17
+      },
+      "summary": {
+        "zero_shot": {
+          "acc": {
+            "mean": 0.4898,
+            "std": 0.0144
+          },
+          "nll": {
+            "mean": 1.0515,
+            "std": 0.0279
+          },
+          "brier": {
+            "mean": 0.5685,
+            "std": 0.0169
+          },
+          "ece": {
+            "mean": 0.2163,
+            "std": 0.0266
+          }
+        },
+        "calibrated": {
+          "acc": {
+            "mean": 0.8367,
+            "std": 0.0323
+          },
+          "nll": {
+            "mean": 0.5675,
+            "std": 0.0749
+          },
+          "brier": {
+            "mean": 0.2647,
+            "std": 0.0377
+          },
+          "ece": {
+            "mean": 0.1475,
+            "std": 0.0381
+          },
+          "aurc": {
+            "mean": 0.1295,
+            "std": 0.0557
+          }
+        },
+        "calibrated_fewshot": {
+          "acc": {
+            "mean": 0.8694,
+            "std": 0.0274
+          },
+          "nll": {
+            "mean": 0.3815,
+            "std": 0.0777
+          },
+          "brier": {
+            "mean": 0.1894,
+            "std": 0.0351
+          },
+          "ece": {
+            "mean": 0.0978,
+            "std": 0.0316
+          }
+        },
+        "majority_acc": 0.2735
+      },
+      "scope": {
+        "abstain_threshold": 0.99,
+        "in_scope_abstain_rate": 0.102,
+        "ood": {
+          "bottle_good": {
+            "n": 120,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "screw_good": {
+            "n": 141,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "carpet_good": {
+            "n": 128,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "textures": {
+            "n": 150,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          },
+          "stl10_cats": {
+            "n": 100,
+            "auroc": 1.0,
+            "rejected": 1.0,
+            "answered_confidently": 0.0
+          }
+        }
+      },
+      "per_seed": {
+        "0": {
+          "zero_shot": {
+            "acc": 0.4898,
+            "nll": 1.0538,
+            "brier": 0.5717,
+            "ece": 0.1885
+          },
+          "calibrated": {
+            "acc": 0.8571,
+            "nll": 0.541,
+            "brier": 0.2342,
+            "ece": 0.1084,
+            "aurc": 0.1487,
+            "fit": {
+              "qid": "defect_type",
+              "scale": 289.811,
+              "bias": [
+                3.33,
+                -3.017,
+                2.29,
+                -2.603
+              ],
+              "train_nll": 0.4989,
+              "abstain_threshold": 0.99
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.898,
+            "nll": 0.3733,
+            "brier": 0.1737,
+            "ece": 0.0576
+          },
+          "n_calib": 21,
+          "n_test": 49,
+          "majority_acc": 0.2653
+        },
+        "1": {
+          "zero_shot": {
+            "acc": 0.4898,
+            "nll": 1.0693,
+            "brier": 0.5799,
+            "ece": 0.2043
+          },
+          "calibrated": {
+            "acc": 0.8163,
+            "nll": 0.6387,
+            "brier": 0.3107,
+            "ece": 0.1101,
+            "aurc": 0.1007,
+            "fit": {
+              "qid": "defect_type",
+              "scale": 307.036,
+              "bias": [
+                3.934,
+                -4.248,
+                2.117,
+                -1.803
+              ],
+              "train_nll": 0.2736,
+              "abstain_threshold": 0.9834
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.8367,
+            "nll": 0.4562,
+            "brier": 0.2337,
+            "ece": 0.1138
+          },
+          "n_calib": 21,
+          "n_test": 49,
+          "majority_acc": 0.2653
+        },
+        "2": {
+          "zero_shot": {
+            "acc": 0.4694,
+            "nll": 1.0708,
+            "brier": 0.5792,
+            "ece": 0.2214
+          },
+          "calibrated": {
+            "acc": 0.8367,
+            "nll": 0.582,
+            "brier": 0.2775,
+            "ece": 0.1971,
+            "aurc": 0.083,
+            "fit": {
+              "qid": "defect_type",
+              "scale": 189.774,
+              "bias": [
+                1.635,
+                -2.157,
+                1.694,
+                -1.172
+              ],
+              "train_nll": 0.5589,
+              "abstain_threshold": 0.9868
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.8571,
+            "nll": 0.3472,
+            "brier": 0.1794,
+            "ece": 0.14
+          },
+          "n_calib": 21,
+          "n_test": 49,
+          "majority_acc": 0.3061
+        },
+        "3": {
+          "zero_shot": {
+            "acc": 0.4898,
+            "nll": 1.0604,
+            "brier": 0.5729,
+            "ece": 0.2084
+          },
+          "calibrated": {
+            "acc": 0.7959,
+            "nll": 0.6235,
+            "brier": 0.2828,
+            "ece": 0.1558,
+            "aurc": 0.2187,
+            "fit": {
+              "qid": "defect_type",
+              "scale": 316.781,
+              "bias": [
+                3.622,
+                -3.711,
+                2.296,
+                -2.207
+              ],
+              "train_nll": 0.3077,
+              "abstain_threshold": 0.9853
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.8571,
+            "nll": 0.457,
+            "brier": 0.2152,
+            "ece": 0.0793
+          },
+          "n_calib": 21,
+          "n_test": 49,
+          "majority_acc": 0.2653
+        },
+        "4": {
+          "zero_shot": {
+            "acc": 0.5102,
+            "nll": 1.0032,
+            "brier": 0.539,
+            "ece": 0.259
+          },
+          "calibrated": {
+            "acc": 0.8776,
+            "nll": 0.4521,
+            "brier": 0.2184,
+            "ece": 0.166,
+            "aurc": 0.0964,
+            "fit": {
+              "qid": "defect_type",
+              "scale": 197.091,
+              "bias": [
+                2.154,
+                -2.425,
+                1.421,
+                -1.15
+              ],
+              "train_nll": 0.6889,
+              "abstain_threshold": 0.9896
+            }
+          },
+          "calibrated_fewshot": {
+            "acc": 0.898,
+            "nll": 0.2736,
+            "brier": 0.1451,
+            "ece": 0.0983
+          },
+          "n_calib": 21,
+          "n_test": 49,
+          "majority_acc": 0.2653
+        }
+      }
+    }
+  }
+}
