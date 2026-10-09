@@ -3,24 +3,18 @@
 Calibrated typed image decisions (`noul` / `choice` / `score`) with abstention, from a few dozen labelled
 images, on a frozen SigLIP 2 backbone. One encoder pass answers the whole question schema.
 
-![status](https://img.shields.io/badge/status-v0.1_technical_report-blue)
+[![status](https://img.shields.io/badge/status-v0.1_technical_report-blue)](report/report.pdf)
+[![report](https://img.shields.io/badge/report-PDF_·_6_pages-orange)](report/report.pdf)
 ![license](https://img.shields.io/badge/license-Apache--2.0-green)
-![python](https://img.shields.io/badge/python-3.10%2B-blue)
+![python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![backbone](https://img.shields.io/badge/backbone-SigLIP_2_so400m-6f42c1)
-[![report](https://img.shields.io/badge/report-PDF-orange)](report/report.pdf)
-![no training](https://img.shields.io/badge/weights-none_trained-lightgrey)
+![weights](https://img.shields.io/badge/trained_weights-none-lightgrey)
+![calibration](https://img.shields.io/badge/calibration-30–50_images_per_option-2F6F8F)
+![latency](https://img.shields.io/badge/latency-72_ms_per_image_(GB10)-2F6F8F)
+![tests](https://img.shields.io/badge/tests-4_passing_(stub_backbone)-brightgreen)
+![ood](https://img.shields.io/badge/out--of--scope_rejected-100%25-brightgreen)
 
-```mermaid
-flowchart LR
-    I[image] --> E[SigLIP 2 encoder<br/>frozen, one pass] --> S[state vector]
-    Q[recipe: questions<br/>noul / choice / score] --> P[text prototypes<br/>cached]
-    L[30-50 labelled images<br/>per option, your camera] --> C[calibrate once:<br/>temperature + bias,<br/>few-shot prototype blend,<br/>scope gate]
-    C --> P
-    C --> G[nearest-neighbour gate<br/>95% in-scope coverage]
-    S --> D[dot products + softmax] --> A[answers with<br/>calibrated probabilities]
-    P --> D
-    S --> G --> A2[confidence, abstain]
-```
+![Pipeline: one frozen SigLIP 2 pass per image serves every question; calibration is a per-deployment numpy fit on a few dozen labelled images.](report/figures/pipeline.png)
 
 **What it is for.** Questions a person could answer from a thumbnail: is this part defective, which
 ripeness stage, is the shelf empty, which of four packaging types. You give it 30 to 50 labelled images
@@ -29,6 +23,67 @@ confidence and an abstain flag, in about 70 ms per image on a GB10 for any numbe
 
 **What it is not for.** Fine detail: small defects, text, counting, spatial relations. The report shows
 where that ceiling is (screw defects on MVTec AD: 0.71 yes/no, chance on type).
+
+## Examples
+
+![The shipped demo: four held-out banana images and one synthetic image that is not a banana, with the released CLI's actual output under each.](report/figures/demo.png)
+
+```bash
+certo-vision decide --recipe recipes/banana.json --calib demo/banana/calib.npz demo/banana/samples/*.png
+```
+
+One line of JSON per image (`demo/banana/decisions.jsonl` is this exact output from the Spark):
+
+```json
+{"image": "demo/banana/samples/overripe.png", "model": "certo-vision-0.1",
+ "answers": {
+   "ripeness": {"type": "score", "score": 2.952, "legend": {"0": "Green: unripe, fully green banana", "...": "..."},
+                "probabilities": {"0": 0.0014, "1": 0.0139, "2": 0.0165, "3": 0.9683},
+                "confidence": 0.9918, "calibrated": true, "abstain": false},
+   "overripe": {"type": "noul", "noul": 0.9249, "confidence": 0.9918, "calibrated": true, "abstain": false},
+   "stage":    {"type": "choice", "choice": "Overripe",
+                "probabilities": {"Green": 0.0187, "Semi-ripe": 0.0717, "Ripe": 0.0201, "Overripe": 0.8895},
+                "confidence": 0.9918, "calibrated": true, "abstain": false}},
+ "timing_ms": {"embed": 79.6, "decide": 0.817}}
+```
+
+The same question set over HTTP, Jev-shaped. Questions can be named from the loaded recipe or given as full specs:
+
+```bash
+certo-vision serve --recipe recipes/banana.json --calib demo/banana/calib.npz --port 8080
+curl -s localhost:8080/v1/systemone -H 'content-type: application/json' -d '{
+  "state": {"image_b64": "'$(base64 < demo/banana/samples/not_a_banana.png | tr -d '\n')'"},
+  "questions": ["overripe"]}'
+```
+
+```json
+{"model": "certo-vision-0.1",
+ "answers": {"overripe": {"type": "noul", "noul": 0.0142, "confidence": 0.6505, "calibrated": true, "abstain": true}},
+ "timing_ms": {"embed": 75.6, "decide": 1.5}}
+```
+
+`abstain: true` is the gate saying the image is unlike anything it was calibrated on; the probability is still
+returned, but the caller should not act on it.
+
+From Python:
+
+```python
+from PIL import Image
+from certo_vision import Decider, SiglipEmbedder
+from certo_vision.recipe import load_recipe, specs
+
+dec = Decider(SiglipEmbedder())                       # google/siglip2-so400m-patch14-384
+dec.load("demo/banana/calib.npz")
+qs = specs(load_recipe("recipes/banana.json"))        # {"ripeness": {...}, "overripe": {...}, "stage": {...}}
+out = dec.decide({"image": Image.open("demo/banana/samples/ripe.png")}, qs)
+out["answers"]["ripeness"]["score"], out["answers"]["stage"]["abstain"]   # (2.028, False)
+```
+
+Write your own recipe, drop labelled images in `images/<label>/`, and calibrate:
+
+```bash
+certo-vision calibrate --recipe my.json --images images --out my_calib.npz
+```
 
 ## Results
 
@@ -69,41 +124,7 @@ The command runs a 30% held-out check first and prints, per question, accuracy, 
 the majority rate and the abstain rate, then refits on everything and saves one file. It warns when an
 option has fewer than ten images.
 
-Answer questions for image files:
-
-```bash
-certo-vision decide --recipe recipes/banana.json --calib calib.npz photo.png
-```
-
-```json
-{"image": "demo/banana/samples/overripe.png", "model": "certo-vision-0.1",
- "answers": {
-   "ripeness": {"type": "score", "score": 2.952, "legend": {"0": "Green: unripe, fully green banana", "...": "..."},
-                "probabilities": {"0": 0.0014, "1": 0.0139, "2": 0.0165, "3": 0.9683},
-                "confidence": 0.9918, "calibrated": true, "abstain": false},
-   "overripe": {"type": "noul", "noul": 0.9249, "confidence": 0.9918, "calibrated": true, "abstain": false},
-   "stage":    {"type": "choice", "choice": "Overripe",
-                "probabilities": {"Green": 0.0187, "Semi-ripe": 0.0717, "Ripe": 0.0201, "Overripe": 0.8895},
-                "confidence": 0.9918, "calibrated": true, "abstain": false}},
- "timing_ms": {"embed": 79.6, "decide": 0.817}}
-```
-
-Serve it (Jev-shaped `POST /v1/systemone`; questions by name from the recipe, or full specs inline):
-
-```bash
-certo-vision serve --recipe recipes/banana.json --calib calib.npz --port 8080
-python tools/post_image.py http://127.0.0.1:8080 photo.png ripeness overripe
-```
-
-Try the shipped demo without calibrating anything: `demo/banana/calib.npz` is the banana recipe
-calibrated on 140 images per level (`demo/banana/calibrate.json` is the held-out check it printed);
-`demo/banana/samples/` holds one held-out image per level, all answered correctly, and one image that
-is not a banana, which abstains at confidence 0.65 against a threshold of 0.97. The full run is in
-`results/release_check_spark.log`.
-
-```bash
-certo-vision decide --recipe recipes/banana.json --calib demo/banana/calib.npz demo/banana/samples/*.png
-```
+Then `certo-vision decide` and `certo-vision serve` as in the examples above.
 
 ## Recipe format
 
@@ -159,7 +180,7 @@ certo_vision/   decider (prototypes, calibration, gate, persistence), embedders,
 recipes/        the question sets used in the report
 demo/banana/    a calibration file and held-out samples to try the CLI immediately
 results/        the JSON behind every number in the report
-report/         report.md, report.pdf, figures and the script that makes them
+report/         report.md, report.pdf, figures and the scripts that make them
 benchmarks/     STL-10 backbone comparison and out-of-scope study
 tools/          dataset export, HTTP helper, the end-to-end release check
 tests/          pipeline tests on a deterministic stub embedder (no weights)
